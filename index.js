@@ -1,7 +1,8 @@
 const express = require('express'),
       bodyParser = require('body-parser'),
       cors = require('cors'),
-      uuidv1 = require('uuid/v1')
+      uuidv1 = require('uuid/v1'),
+      path = require('path')
       
 let app = express(),
     cheerio = require('cheerio'),
