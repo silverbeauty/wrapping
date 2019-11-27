@@ -70,6 +70,7 @@ const srapping = (req, res) => {
       }
     })
     .catch(function(err) {
+      console.log('err', err)
       //handle error
     });
   }
