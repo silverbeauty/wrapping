@@ -35,17 +35,9 @@ const srapping = async(req, res) => {
   console.log('hostname', hostname);
   const browser = await puppeteer.launch({args: ['--no-sandbox']});
     
-    puppeteer
-    .launch()
-    .then(function(browser) {
-      return browser.newPage();
-    })
-    .then(function(page) {
-      return page.goto(url).then(function() {
-        return page.content();
-      });
-    })
-    .then(function(html) {
+  const page = await browser.newPage()
+    await page.goto(url)
+   const  html = await awaitpage.content();
       let $ = cheerio.load(html);
       console.log('html', html);
       let images = $('body').find('img');
@@ -69,11 +61,6 @@ const srapping = async(req, res) => {
           data
         })
       }
-    })
-    .catch(function(err) {
-      console.log('err', err)
-      //handle error
-    });
   }
 app.post('/', catchError(srapping));
 app.get('/',  (req, res) => { res.send('OK'); });
