@@ -36,7 +36,7 @@ const srapping = async(req, res) => {
   console.log('hostname', hostname);
   const browser = await puppeteer.launch({
     headless: true,
-   executablePath:'/var/www/wrapping/node_modules/puppeteer/.local-chromium/linux-650583/chrome-linux/chrome',
+   executablePath:'/var/www/wrapping/node_modules/puppeteer/.local-chromium/linux-706915',
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
   });
     
