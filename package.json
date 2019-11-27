@@ -1,0 +1,24 @@
+{
+  "name": "scrapping",
+  "version": "1.0.0",
+  "description": "scrapping",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./index",
+    "start": "node ./index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "superwebtop",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cheerio": "^1.0.0-rc.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "is-url": "^1.2.4",
+    "puppeteer": "^2.0.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.5",
+    "uuid": "^3.3.3"
+  }
+}
