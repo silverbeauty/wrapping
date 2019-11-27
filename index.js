@@ -32,7 +32,8 @@ const catchError = (callback) => {
 const srapping = (req, res) => {
   const {url} = req.body
   const hostname = urlParser.parse(url).protocol + '//' + urlParser.parse(url).hostname;
-
+  console.log('hostname', hostname);
+  
     puppeteer
     .launch()
     .then(function(browser) {
@@ -45,6 +46,7 @@ const srapping = (req, res) => {
     })
     .then(function(html) {
       let $ = cheerio.load(html);
+      console.log('html', html);
       let images = $('body').find('img');
     
       if(images.length > 0) {
