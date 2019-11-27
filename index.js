@@ -33,7 +33,8 @@ const srapping = async(req, res) => {
   const {url} = req.body
   const hostname = urlParser.parse(url).protocol + '//' + urlParser.parse(url).hostname;
   console.log('hostname', hostname);
-  
+  const browser = await puppeteer.launch({args: ['--no-sandbox']});
+    
     puppeteer
     .launch()
     .then(function(browser) {
