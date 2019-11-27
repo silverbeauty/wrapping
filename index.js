@@ -29,7 +29,7 @@ const catchError = (callback) => {
 }
 
   
-const srapping = (req, res) => {
+const srapping = async(req, res) => {
   const {url} = req.body
   const hostname = urlParser.parse(url).protocol + '//' + urlParser.parse(url).hostname;
   const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
