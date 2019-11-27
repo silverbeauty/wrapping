@@ -38,7 +38,7 @@ const srapping = async(req, res) => {
     
   const page = await browser.newPage();
   await page.goto(url);
-   const  html = await awaitpage.content();
+   const  html = await page.content();
       let $ = cheerio.load(html);
       console.log('html', html);
       let images = $('body').find('img');
