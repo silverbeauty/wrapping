@@ -33,7 +33,7 @@ const srapping = async(req, res) => {
   const {url} = req.body
   const hostname = urlParser.parse(url).protocol + '//' + urlParser.parse(url).hostname;
   console.log('hostname', hostname);
-  const browser = await puppteer.launch({
+  const browser = await puppeteer.launch({
     executablePath:path.resolve(__dirname,'../node_modules/puppeteer/.local-chromium/linux-650583/chrome-linux/chrome')
 });
     
