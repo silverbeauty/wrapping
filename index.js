@@ -36,8 +36,8 @@ const srapping = async(req, res) => {
   console.log('hostname', hostname);
   const browser = await puppeteer.launch({args: ['--no-sandbox']});
     
-  const page = await browser.newPage()
-    await page.goto(url)
+  const page = await browser.newPage();
+  await page.goto(url);
    const  html = await awaitpage.content();
       let $ = cheerio.load(html);
       console.log('html', html);
