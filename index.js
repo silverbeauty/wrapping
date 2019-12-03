@@ -33,11 +33,12 @@ const catchError = (callback) => {
 const srapping = async(req, res) => {
   const {url} = req.body
   const hostname = urlParser.parse(url).protocol + '//' + urlParser.parse(url).hostname;
-  console.log('hostname', hostname);
   const browser = await puppeteer.launch({args: ['--no-sandbox']});
     
   const page = await browser.newPage();
-  await page.goto(url);
+  await page.goto(url, {
+    timeout: 0
+});
   const  html = await page.content();
       let $ = cheerio.load(html);
       let images = $('body').find('img');
@@ -60,6 +61,10 @@ const srapping = async(req, res) => {
         res.json({
           data
         })
+      } else {
+        res.status(400).json({
+          status: 'false'
+        })
       }
   }
 app.post('/', catchError(srapping));
@@ -70,4 +75,3 @@ const server = app.listen(port, (err) => {
     console.log('App Listening on ', port);
   }
 });
-  
