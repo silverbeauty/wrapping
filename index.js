@@ -33,39 +33,41 @@ const catchError = (callback) => {
 const srapping = async(req, res) => {
   const {url} = req.body
   const hostname = urlParser.parse(url).protocol + '//' + urlParser.parse(url).hostname;
-  const browser = await puppeteer.launch({args: ['--no-sandbox']});
+  if(url){
+    const browser = await puppeteer.launch({args: ['--no-sandbox']});
     
-  const page = await browser.newPage();
-  await page.goto(url, {
-    timeout: 0
-});
-  const  html = await page.content();
-      let $ = cheerio.load(html);
-      let images = $('body').find('img');
-    
-      if(images.length > 0) {
-        let data = []
-        for(let i=0; i<images.length; i++) {
-          let imageLink = images[i].attribs.src;
-                  
-          if(!isUrl(imageLink)) {
-            imageLink = hostname + imageLink;
+    const page = await browser.newPage();
+    await page.goto(url, {
+      timeout: 0
+  });
+    const  html = await page.content();
+        let $ = cheerio.load(html);
+        let images = $('body').find('img');
+      
+        if(images.length > 0) {
+          let data = []
+          for(let i=0; i<images.length; i++) {
+            let imageLink = images[i].attribs.src;
+                    
+            if(!isUrl(imageLink)) {
+              imageLink = hostname + imageLink;
+            }
+            
+            const image = {
+              '_id': uuidv1(),
+              'src': imageLink
+            };
+            data.push(image)
           }
-          
-          const image = {
-            '_id': uuidv1(),
-            'src': imageLink
-          };
-          data.push(image)
+          res.json({
+            data
+          })
+        } else {
+          res.status(400).json({
+            status: 'false'
+          })
         }
-        res.json({
-          data
-        })
-      } else {
-        res.status(400).json({
-          status: 'false'
-        })
-      }
+  }
   }
 app.post('/', catchError(srapping));
 app.get('/',  (req, res) => { res.send('OK'); });
