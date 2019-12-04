@@ -39,7 +39,7 @@ const srapping = async(req, res) => {
     const page = await browser.newPage();
     await page.goto(url, {
       timeout: 0
-  });
+    });
     const  html = await page.content();
         let $ = cheerio.load(html);
         let images = $('body').find('img');
@@ -67,8 +67,12 @@ const srapping = async(req, res) => {
             status: 'false'
           })
         }
+  } else {
+    res.status(400).json({
+      status: 'false'
+    })
   }
-  }
+}
 app.post('/', catchError(srapping));
 app.get('/',  (req, res) => { res.send('OK'); });
 const server = app.listen(port, (err) => {
